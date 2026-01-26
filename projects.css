@@ -1,0 +1,201 @@
+@import url('https://unpkg.com/normalize.css') layer(normalize);
+
+@layer normalize, base, demo, stick, effect, scrollbar, debug;
+
+/* ================= DEBUG ================= */
+@layer debug {
+    [data-debug='true'] li {
+        outline: 0.05em dashed currentColor;
+    }
+    [data-debug='true'] :is(h2, li:last-of-type) {
+        outline: 0.05em dashed canvasText;
+    }
+}
+
+/* ================= SCROLLBAR ================= */
+@layer scrollbar {
+    @property --hue {
+        initial-value: 0;
+        syntax: '<number>';
+        inherits: false;
+    }
+    @property --chroma {
+        initial-value: 0;
+        syntax: '<number>';
+        inherits: true;
+    }
+
+    [data-sync-scrollbar='true'] {
+        scrollbar-color: oklch(var(--lightness) var(--chroma) var(--hue)) #0000;
+    }
+}
+
+/* ================= EFFECT ================= */
+@layer effect {
+    :root {
+        --start: 0;
+        --end: 360;
+        --lightness: 65%;
+        --base-chroma: 0.3;
+    }
+
+    [data-theme='dark'] {
+        --lightness: 75%;
+    }
+
+    ul {
+        --step: calc((var(--end) - var(--start)) / (var(--count) - 1));
+    }
+}
+
+/* ================= STICK (SAFE) ================= */
+@layer stick {
+    main {
+        width: 100%;
+    }
+}
+
+/* ================= DEMO ================= */
+@layer demo {
+    h1 {
+        --font-size-min: 24;
+        --font-level: 8;
+        line-height: 0.9;
+        margin: 0;
+        background: linear-gradient(
+            canvasText 60%,
+            color-mix(in oklch, canvas, canvasText)
+        );
+        background-clip: text;
+        color: #ffff;
+    }
+}
+
+/* ================= BASE ================= */
+@layer base {
+    :root {
+        --font-size-min: 14;
+        --font-size-max: 20;
+        --font-ratio-min: 1.1;
+        --font-ratio-max: 1.33;
+        --font-width-min: 375;
+        --font-width-max: 1500;
+    }
+
+    html {
+        color-scheme: light dark;
+    }
+
+    body {
+        background: light-dark(white, black);
+        min-height: 100vh;
+        font-family: 'Geist', system-ui, sans-serif;
+    }
+
+    body::before {
+        --size: 45px;
+        --line: color-mix(in hsl, canvasText, transparent 70%);
+        content: '';
+        position: fixed;
+        inset: 0;
+        background:
+            linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)),
+            linear-gradient(var(--line) 1px, transparent 1px var(--size));
+        background-size: var(--size) var(--size);
+        mask: linear-gradient(-20deg, transparent 50%, white);
+        pointer-events: none;
+        z-index: -1;
+    }
+}
+
+/* ================= NAV ================= */
+.link {
+    color: gray;
+    text-align: center;
+    font-size: 58px;
+    padding-right: 32px;
+    text-decoration: none;
+}
+
+/* ================= TYPOGRAPHY ================= */
+.content1 {
+    color: white;
+    font-size: 16px;
+    margin-left: 40px;
+    max-width: 900px;
+}
+
+.content2 {
+    color: white;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.content3 {
+    color: gray;
+    font-size: 12px;
+}
+
+/* ================= PROJECT SECTIONS ================= */
+.projects {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+}
+
+.project {
+    margin-bottom: 7rem;
+}
+
+.project .tag {
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.6;
+    margin-bottom: 2rem;
+}
+
+.project-links {
+    margin-left: 40px;
+    margin-top: 1rem;
+}
+
+.project-links a {
+    color: #aaa;
+    text-decoration: underline;
+    margin-right: 1rem;
+}
+
+/* ================= IMAGES ================= */
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.rounded-image {
+    height: 300px;
+    width: auto;
+    border-radius: 15px;
+    border: 1px solid #444;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+pre {
+    background: #0b0b0b;
+    border-radius: 12px;
+    padding: 1.5rem;
+    overflow-x: auto;
+    max-width: 1000px;
+    margin: 2rem auto;
+}
+
+code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+}

@@ -1,54 +1,197 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="projects.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   </head>
   <body>
+<!-- site content -->
+<section class="projects">
+<a class="link" href="index.html">BACK TO INDEX</a>
+  <br>
+  <br>
+  <!-- ===================== -->
+  <!-- 3.6L INLINE-4 ENGINE -->
+  <!-- ===================== -->
+  <section class="project">
+    <h1 class="content2">ENGINEERING — 3.6L INLINE-4 ROTARY VALVE ENGINE</h1>
+    <p class="tag">CAD • Simulation • Internal Combustion Engines</p>
 
-    <!-- nav bar -->
-    <a class="link" href="index.html">H O M E</a>
-    <a class="link" href="gallery.html">GALLERY</a>
-    <a class="link">PROJECTS</a>
-    <br><br><br><br><br>
-    <!-- end of nav bar -->
-    <br><br>
-    <!-- end of header and ico. -->
+    <h2 class="content1">
+      Over the course of two months, I designed and simulated a 3.6L inline-4 internal combustion engine using Fusion 360, Blender, and an
+      <a href="https://github.com/ange-yaghi/engine-sim">open-source ICE simulation tool</a>.
+    </h2>
 
-    <!-- site content -->
-    <h1 class="content2">ENGINEERING - 3.6L INLINE 4</h1>
-    <h2 class="content1">Over the course of 2 months I've designed and simulated an inline-4 cylinder internal combustion engine using the following programs: Fusion360, Blender, and this <a href="https://github.com/ange-yaghi/engine-sim">open-source ICE simulation tool</a>.</h2>
-    <h2 class="content1">This design is unique because of its use of a rotary valve in favor of the tradtional poppet valve actuated by camshafts; in principal, the cam shaft and poppet valve have been combined. Utilzing mechanical seals and carbon bushings, the increased airflow and simplicity of the design, have allowed it to produce 900(crank) horspower in simulations. 
-      That translate to about 250 horspower per liter of displacement. For reference, the current horspower per liter record out of a naturally aspirated engine is held by the Honda S2000's F20C engine, boasting 125hp per/L. In Blender, I textured and created the following 'glamour shot' renders of components designed in fusion.
-      <a href="portfolio/36Li4.pdf">Here is a link to a a summarative document which includes more renders and the simulation.</a></h2>
+    <h2 class="content1">
+      This design replaces traditional camshafts and poppet valves with a rotary valve system, combining valve actuation and timing into a single rotating assembly.
+      Using mechanical seals and carbon bushings, the design enables significantly increased airflow and mechanical simplicity.
+      Simulations indicate approximately 900 horsepower at the crank (~250 hp/L), exceeding current naturally aspirated specific output benchmarks.
+    </h2>
+
+    <h2 >
+      In Blender, I created textured, photorealistic renders of major components and assemblies.
+      A full technical summary, renders, and simulation data are available below.
+    </h2>
+
+    <p class="project-links">
+      <a href="portfolio-projects/36Li4/36Li4.pdf">📄 Technical Summary (PDF)</a>
+    </p>
+  </section>
+
+  <!-- ===================== -->
+  <!-- OBSIDIANDART -->
+  <!-- ===================== -->
+  <section class="project">
+    <h1 class="content2">PROGRAMMING — OBSIDIANDART (CLI ENCRYPTION TOOL)</h1>
+    <p class="tag">C++ • Cryptography • Linux • Security</p>
+
+<h2 class="content1">
+  ObsidianDart is a lightweight, command-line encryption utility written in C++ for Linux systems.
+  It is designed for simple, local encryption workflows rather than full-scale password management.
+</h2>
+
+<h2 class="content1">
+  The tool relies on system-provided cryptographic libraries (OpenSSL) to perform AES-256 encryption
+  and allows users to encrypt or decrypt files stored in the local working directory.
+  Data may be formatted using tab- or comma-separated values for compatibility with external tools.
+</h2>
+
+<h2 class="content1">
+  ObsidianDart is intentionally minimal in scope, focusing on local file encryption with a small codebase
+  and no cloud dependencies.
+  Source code is currently being cleaned, documented, and prepared for public release.
+</h2>
+
+    <p class="project-links">
+      <a href="portfolio/obsidiandart/overview.pdf">📄 Technical Overview (PDF)</a> |
+      <a href="https://github.com/00jnr00/ObsidianDart">GitHub Repository</a>
+    </p>
+  </section>
+
+  <!-- ===================== -->
+  <!-- ADDITIVE MANUFACTURING / WMI -->
+  <!-- ===================== -->
+  <section class="project">
+    <h1 class="content2">ENGINEERING — ADDITIVE MANUFACTURING DESIGN PORTFOLIO</h1>
+    <p class="tag">Additive Manufacturing • Fluid Systems • Automotive Engineering</p>
+
+    <h2 class="content1">
+      These projects focuses on the design and additive manufacturing of high-performance polymer components for automotive fluid systems,
+      including a custom water-methanol injection (WMI) polymer atomizer.
+    </h2>
+
+    <h2 class="content1">
+      The design explores advanced internal geometries enabled by additive manufacturing to improve atomization quality,
+      durability, and thermal resistance under high-pressure and high-temperature operating conditions.
+    </h2>
+
+    <h2 class="content1">
+      A consolidated technical document covers both the polymer atomizer and related additive manufacturing design methodologies.
+    </h2>
+
+    <p class="project-links">
+      <a href="portfolio-projects/am/portfolio.pdf">📄 Additive Manufacturing/Portfolio PDF)</a>
+    </p>
+  </section>
+
+  <!-- ===================== -->
+  <!-- SURROGATE CFD -->
+  <!-- ===================== -->
+  <section class="project">
+    <h1 class="content2">COMPUTATIONAL ENGINEERING — RAY-CAST SURROGATE CFD ESTIMATOR</h1>
+    <p class="tag">CFD • Numerical Methods • Geometry Processing • Performance Estimation</p>
+
+    <h2 class="content1">
+      This project implements a surrogate computational fluid dynamics (CFD) estimator using ray-casting techniques
+      to rapidly approximate flow behavior and pressure characteristics in complex geometries.
+    </h2>
+
+    <h2 class="content1">
+      The system is designed to provide hyper-accelerated performance estimation compared to traditional CFD solvers,
+      enabling rapid iteration during early-stage design and optimization. Heres a small codeblock that illustrates the model subdicision with raycsting.
+    </h2>
+      <pre><code class="language-python">
+def slice_grid(mesh, x, N):
+    ymin, zmin = mesh.bounds[0][1:]
+    ymax, zmax = mesh.bounds[1][1:]
+
+    ys = np.linspace(ymin, ymax, N)
+    zs = np.linspace(zmin, zmax, N)
+
+    x0 = mesh.bounds[0][0] - 0.5
+    origins = np.array([[x0, y, z] for y in ys for z in zs])
+    dirs = np.tile([1, 0, 0], (len(origins), 1))
+
+    hits = mesh.ray.intersects_any(origins, dirs)
+    return hits.reshape(N, N).astype(float)
+</code></pre>
+    <h2 class="content1">
+      The estimator serves as a pre-CFD screening tool to identify promising geometries before committing to full-resolution simulations.
+    </h2>
+
+    <p class="project-links">
+      <a href="portfolio-projects/am/portfolio.pdf">📄 Technical Overview (PDF)</a>
+    </p>
+
+
+  </section>
+
+  <!-- ===================== -->
+  <!-- BMEP SIMULATION -->
+  <!-- ===================== -->
+  <section class="project">
+    <h1 class="content2">ENGINE SIMULATION — BMEP & PERFORMANCE MODELING</h1>
+    <p class="tag">Engine Modeling • Thermodynamics • Performance Simulation</p>
+
+    <h2 class="content1">
+      This project focuses on brake mean effective pressure (BMEP)-based engine simulation to estimate torque, power,
+      and volumetric efficiency across operating ranges.
+    </h2>
+
+    <h2 class="content1">
+      The model is used to compare engine architectures, airflow configurations, and combustion assumptions
+      to guide early-stage engine design decisions.
+    </h2>
+
+    <h2 class="content1">
+      The simulation framework allows rapid exploration of displacement, RPM range, and airflow assumptions
+      to assess feasibility prior to detailed mechanical design.
+    </h2>
+
+    <p class="project-links">
+      <a href="portfolio/bmep/bmep_simulation_overview.pdf">📄 Simulation Overview Document not Currently Available (PDF)</a>
+    </p>
+  </section>
+
+  <!-- ===================== -->
+  <!-- BATTLE BOT (OPTIONAL KEEP) -->
+  <!-- ===================== -->
+  <section class="project">
+    <h1 class="content2">ENGINEERING — COMBAT ROBOT DESIGN & FABRICATION</h1>
+    <p class="tag">Electronics • CAD • Fabrication • Mechatronics</p>
+
+    <h2 class="content1">
+      I have designed and built multiple combat robots, handling mechanical design, electrical systems,
+      wiring diagrams, soldering, and radio control integration.
+    </h2>
+
+    <h2 class="content1">
+      Structural components and mounts were designed in Fusion 360 and fabricated using 3D printing.
+    </h2>
+
     <div class="image-container">
-        <img src="portfolio/pistons.png" class="rounded-image">
-        <img src="portfolio/head.png" class="rounded-image">
+      <img src="portfolio-projects/battlebot/shell.jpeg" class="rounded-image">
+      <img src="portfolio-projects/battlebot/internals.jpeg" class="rounded-image">
+      <img src="portfolio-projects/battlebot/wiring-diagram.jpeg" class="rounded-image">
     </div>
-    
-    <br><br><br><br>
-    
-    <h1 class="content2">PROGRAMMING - OBSIDIANDART</h1>
-        <h2 class="content1">Cloud based password managment is inherently vunreable; violating the software engineers' most fundamental axioms in relation to security. More interfacing software stacks means more points of failure. When it comes to programs which handle senstive data, like password managers, they're one of the last things you want to be vunreable.</h2>
-        <h2 class="content1">ObsidianDart is a dead-simple AES 256-bit encryption program written in C++ by me. Its made for Linux systems and utilizes (usually) pre-packaged encryption tools in your distro. (Namely: OpenSSL) ObsidianDart is opensource, this is a link to the  <a href=https://github.com/00jnr00/ObsidianDart">github page<a>. Being operated via the terminal, the program can encrypt and decrypt a file within the local folder(passwords.wf). The user can choose to use tab or comma seperated values and open it within another program to parse said formatting. ObsidianDart is soley a lightweight cryptography tool, intented for senstive, text-based information.</h2>
+  </section>
 
-    <br><br><br><br>
-    <h1 class="content2">ENGINEERING - BATTLE BOT</h1>
-    <h2 class="content1">My engineering and design skillset is not soley limited to simulations; I've designed and built numerous battle bots. I have experience in the asssembly process: constructing wiring diagrams, soldering eletronic components, using radio communication, etc. These skills have helped me construct the following battle bot.</h2>
-    <h2 class="content1">The body components and mounts for eletrical components were designed in Fusion360 and 3D printed.</h2>
-    <div class="image-container">
-        <img src="portfolio/assembled.jpeg" class="rounded-image">
-        <img src="portfolio//battlebot.PNG" class="rounded-image">
-        <img src="portfolio/fullcomp.jpeg" class="rounded-image">
-    </div>
-   <!-- end of site content -->
+</section>
+<!-- end of site content -->
 
 
-
-    <!-- info for liscencing-->
-    <p class="content3">The code for this site is open sourced, and forkable. </p>
-    <!--lisc.-->
+<!-- ================= END PROJECTS ================= -->
 
   </body>
 </html>
