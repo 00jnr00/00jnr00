@@ -1,196 +1,449 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="dark" style="color-scheme: dark only;">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects — Sanchez Performance</title>
     <link rel="stylesheet" href="projects.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <style>
+      :root { color-scheme: dark only; }
+      .projects-page {
+        width: min(860px, 92vw);
+        margin: 0 auto;
+        padding: 4rem 0 8rem;
+      }
+
+      .back-link {
+        display: inline-block;
+        color: color-mix(in oklch, canvasText, transparent 45%);
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-decoration: none;
+        text-transform: uppercase;
+        margin-bottom: 4rem;
+        transition: color 0.2s;
+      }
+      .back-link:hover { color: canvasText; }
+
+      .project-entry {
+        border-top: 1px solid color-mix(in oklch, canvasText, transparent 80%);
+        padding: 3rem 0 3.5rem;
+      }
+
+      .project-index {
+        font-size: 0.65rem;
+        letter-spacing: 0.2em;
+        color: color-mix(in oklch, canvasText, transparent 55%);
+        text-transform: uppercase;
+        margin-bottom: 0.6rem;
+      }
+
+      .project-title {
+        font-size: clamp(1rem, 2.2vw, 1.3rem);
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        margin: 0 0 0.75rem;
+        line-height: 1.25;
+        background: linear-gradient(canvasText 60%, color-mix(in oklch, canvas, canvasText));
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+
+      .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 1.2rem;
+      }
+      .tag {
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.65rem;
+        border: 1px solid color-mix(in oklch, canvasText, transparent 72%);
+        border-radius: 2px;
+        color: color-mix(in oklch, canvasText, transparent 30%);
+      }
+
+      .status-line {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 1.4rem;
+      }
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        flex-shrink: 0;
+        background: oklch(72% 0.18 145);
+        box-shadow: 0 0 6px oklch(72% 0.18 145);
+      }
+      .status-dot.in-dev {
+        background: oklch(72% 0.18 60);
+        box-shadow: 0 0 6px oklch(72% 0.18 60);
+      }
+      .status-text {
+        font-size: 0.65rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: color-mix(in oklch, canvasText, transparent 35%);
+      }
+
+      .project-body {
+        display: grid;
+        gap: 1rem;
+      }
+      .project-body p {
+        font-size: clamp(0.85rem, 1.4vw, 0.97rem);
+        line-height: 1.8;
+        color: color-mix(in oklch, canvasText, transparent 15%);
+        margin: 0;
+      }
+
+      .stat-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        margin-top: 1.4rem;
+        padding-top: 1.4rem;
+        border-top: 1px solid color-mix(in oklch, canvasText, transparent 88%);
+      }
+      .stat { display: flex; flex-direction: column; gap: 0.2rem; }
+      .stat-value {
+        font-size: clamp(1.1rem, 2vw, 1.45rem);
+        font-weight: 600;
+        color: oklch(75% 0.18 160);
+        letter-spacing: -0.01em;
+      }
+      .stat-label {
+        font-size: 0.62rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: color-mix(in oklch, canvasText, transparent 50%);
+      }
+
+      .code-wrap {
+        margin-top: 1.2rem;
+        border: 1px solid color-mix(in oklch, canvasText, transparent 82%);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .code-label {
+        font-size: 0.62rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: color-mix(in oklch, canvasText, transparent 50%);
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid color-mix(in oklch, canvasText, transparent 85%);
+        background: color-mix(in oklch, canvas, canvasText 4%);
+      }
+      pre[class*="language-"] {
+        margin: 0 !important;
+        border-radius: 0 !important;
+        font-size: 0.8rem !important;
+      }
+
+      .image-container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 12px;
+        margin-top: 1.4rem;
+        flex-wrap: wrap;
+      }
+      .rounded-image {
+        height: 220px;
+        width: auto;
+        border-radius: 4px;
+        border: 1px solid color-mix(in oklch, canvasText, transparent 80%);
+      }
+
+      .project-links {
+        margin-top: 1.4rem;
+        display: flex;
+        gap: 1.2rem;
+        flex-wrap: wrap;
+      }
+      .project-links a {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: color-mix(in oklch, canvasText, transparent 30%);
+        text-decoration: none;
+        border-bottom: 1px solid color-mix(in oklch, canvasText, transparent 70%);
+        padding-bottom: 0.1rem;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .project-links a:hover { color: canvasText; border-color: canvasText; }
+
+      .page-footer {
+        border-top: 1px solid color-mix(in oklch, canvasText, transparent 80%);
+        padding-top: 2rem;
+        font-size: 0.65rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: color-mix(in oklch, canvasText, transparent 55%);
+      }
+    </style>
   </head>
   <body>
-<!-- site content -->
-<section class="projects">
-<a class="link" href="index.html">BACK TO HOME</a>
-  <br>
-  <br>
-  <!-- ===================== -->
-  <!-- 3.6L INLINE-4 ENGINE -->
-  <!-- ===================== -->
-  <section class="project">
-    <h1 class="content2">ENGINEERING — 3.6L INLINE-4 ROTARY VALVE ENGINE</h1>
-    <p class="tag">CAD • Simulation • Internal Combustion Engines</p>
+    <div class="projects-page">
+      <a class="back-link" href="index.html">← Home</a>
 
-    <h2 class="content1">
-      Over the course of two months, I designed and simulated a 3.6L inline-4 internal combustion engine using Fusion 360, Blender, and an
-      <a href="https://github.com/ange-yaghi/engine-sim">open-source ICE simulation tool</a>.
-    </h2>
+      <!-- 01 -->
+      <section class="project-entry">
+        <p class="project-index">01 / Engineering</p>
+        <h1 class="project-title">F150 Variable-Rate Rocker-Linked Damper System</h1>
+        <div class="project-tags">
+          <span class="tag">Suspension Design</span>
+          <span class="tag">Additive Manufacturing</span>
+          <span class="tag">Vehicle Dynamics</span>
+          <span class="tag">PA12 CF</span>
+        </div>
+        <div class="status-line">
+          <div class="status-dot in-dev"></div>
+          <span class="status-text">In Development — Rev 1 Rocker Printed · Triple-Rate Variant Planned</span>
+        </div>
+        <div class="project-body">
+          <p>
+            Ground-up suspension architecture for a 2005 Ford F-150 triple-duty build — pre-runner, street, and bog.
+            The system uses a rocker-linked tandem damper arrangement with one stiff and one soft adjustable shock
+            to produce variable effective spring rate across travel. Geometry: 1:1 arm ratio, 6" pivot-to-pivot,
+            90° at static ride height. Leaf springs retained for load carrying and axle location only —
+            fully decoupled from damping function.
+          </p>
+          <p>
+            Rev 1 rocker arm printed in PA12 CF with bronze bushings heat-pressed after sand annealing.
+            Five-day validation protocol defined: static load, dynamic articulation, thermal cycling, on-vehicle behavior.
+            Currently evaluating a triple-rate variant for higher-capacity damping across a wider travel range.
+            Long-term roadmap: F150 → bolt-on kit → full custom frame → production vehicle.
+          </p>
+        </div>
+        <div class="image-container">
+          <!-- <img src="portfolio-projects/f150-damper/rocker-rev1.jpg" class="rounded-image" alt="PA12 CF rocker arm Rev 1"> -->
+        </div>
+      </section>
 
-    <h2 class="content1">
-      This design replaces traditional camshafts and poppet valves with a rotary valve system, combining valve actuation and timing into a single rotating assembly.
-      Using mechanical seals and carbon bushings, the design enables significantly increased airflow and mechanical simplicity.
-      Simulations indicate approximately 900 horsepower at the crank (~250 hp/L), exceeding current naturally aspirated specific output benchmarks.
-    </h2>
+      <!-- 02 -->
+      <section class="project-entry">
+        <p class="project-index">02 / Engineering</p>
+        <h1 class="project-title">ATOMIZER — Pump-Free WMI Nozzle</h1>
+        <div class="project-tags">
+          <span class="tag">Fluid Systems</span>
+          <span class="tag">Additive Manufacturing</span>
+          <span class="tag">Thermodynamics</span>
+          <span class="tag">PPA-CF</span>
+        </div>
+        <div class="status-line">
+          <div class="status-dot"></div>
+          <span class="status-text">Field Validated — 4+ Weeks Engine Bay Heat Soak</span>
+        </div>
+        <div class="project-body">
+          <p>
+            Water/methanol injection nozzle that eliminates the PWM pump entirely through venturi-based vacuum ejection geometry.
+            Regulated compressed air at 25–75 PSI creates near-sonic choked flow at a precision orifice,
+            drawing and atomizing fluid without a pump, a controller, or complex wiring. Single solenoid on the air line.
+          </p>
+          <p>
+            Nine hardware generations. PLA → Nylon-612-CF → PPA-CF with nanoceramic impregnation.
+            Every failure documented: thread shear, polymer creep under heat soak, vacuum collapse from orientation changes,
+            microporosity, mid-print crystallization in PPA. None of it wasted.
+          </p>
+        </div>
+        <div class="stat-row">
+          <div class="stat">
+            <span class="stat-value">~324 m/s</span>
+            <span class="stat-label">Orifice velocity</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">9</span>
+            <span class="stat-label">Hardware generations</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">$3</span>
+            <span class="stat-label">BOM vs $100–130 retail</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">0</span>
+            <span class="stat-label">Failures at 5–200 PSI</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="portfolio-projects/am/portfolio.pdf">📄 Additive Manufacturing Portfolio</a>
+        </div>
+      </section>
 
-    <h2 >
-      In Blender, I created textured, photorealistic renders of major components and assemblies.
-      A full technical summary, renders, and simulation data are available below.
-    </h2>
+      <!-- 03 -->
+      <section class="project-entry">
+        <p class="project-index">03 / Engineering</p>
+        <h1 class="project-title">PRESION — Crankcase Catch Can</h1>
+        <div class="project-tags">
+          <span class="tag">Additive Manufacturing</span>
+          <span class="tag">Fluid Systems</span>
+          <span class="tag">PA12 CF</span>
+          <span class="tag">Automotive</span>
+        </div>
+        <div class="status-line">
+          <div class="status-dot"></div>
+          <span class="status-text">Field Validated — 12 Months Continuous Runtime</span>
+        </div>
+        <div class="project-body">
+          <p>
+            Crankcase oil separator built around one constraint: use additive manufacturing to produce internal baffling
+            geometry that subtractive machining cannot reach, then optimize simultaneously for condensing surface area
+            and flow efficiency. Four generations. Gen 4 runs PA12 CF with deliberate overextrusion —
+            microporosity near-eliminated as a material property, not a post-process fix.
+            Print-in-place hose barbs eliminate all thread failure points. Unibody construction.
+          </p>
+        </div>
+        <div class="stat-row">
+          <div class="stat">
+            <span class="stat-value">12 mo</span>
+            <span class="stat-label">Continuous runtime</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">4</span>
+            <span class="stat-label">Hardware generations</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">4+ wk</span>
+            <span class="stat-label">Heat soak validated</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="portfolio-projects/am/portfolio.pdf">📄 Additive Manufacturing Portfolio</a>
+        </div>
+      </section>
 
-    <p class="project-links">
-      <a href="portfolio-projects/36li4/36Li4.pdf">📄 Technical Summary (PDF)</a>
-    </p>
-  </section>
-
-  <!-- ===================== -->
-  <!-- OBSIDIANDART -->
-  <!-- ===================== -->
-  <section class="project">
-    <h1 class="content2">PROGRAMMING — OBSIDIANDART (CLI ENCRYPTION TOOL)</h1>
-    <p class="tag">C++ • Cryptography • Linux • Security</p>
-
-<h2 class="content1">
-  ObsidianDart is a lightweight, command-line encryption utility written in C++ for Linux systems.
-  It is designed for simple, local encryption workflows rather than full-scale password management.
-</h2>
-
-<h2 class="content1">
-  The tool relies on system-provided cryptographic libraries (OpenSSL) to perform AES-256 encryption
-  and allows users to encrypt or decrypt files stored in the local working directory.
-  Data may be formatted using tab- or comma-separated values for compatibility with external tools.
-</h2>
-
-<h2 class="content1">
-  ObsidianDart is intentionally minimal in scope, focusing on local file encryption with a small codebase
-  and no cloud dependencies.
-  Source code is currently being cleaned, documented, and prepared for public release.
-</h2>
-
-    <p class="project-links">
-      <a href="https://github.com/00jnr00/ObsidianDart">GitHub Repository</a>
-    </p>
-  </section>
-
-  <!-- ===================== -->
-  <!-- ADDITIVE MANUFACTURING / WMI -->
-  <!-- ===================== -->
-  <section class="project">
-    <h1 class="content2">ENGINEERING — ADDITIVE MANUFACTURING DESIGN PORTFOLIO</h1>
-    <p class="tag">Additive Manufacturing • Fluid Systems • Automotive Engineering</p>
-
-    <h2 class="content1">
-      These projects focuses on the design and additive manufacturing of high-performance polymer components for automotive fluid systems,
-      including a custom water-methanol injection (WMI) polymer atomizer.
-    </h2>
-
-    <h2 class="content1">
-      The design explores advanced internal geometries enabled by additive manufacturing to improve atomization quality,
-      durability, and thermal resistance under high-pressure and high-temperature operating conditions.
-    </h2>
-
-    <h2 class="content1">
-      A consolidated technical document covers both the polymer atomizer and related additive manufacturing design methodologies.
-    </h2>
-
-    <p class="project-links">
-      <a href="portfolio-projects/am/portfolio.pdf">📄 Additive Manufacturing/Portfolio PDF)</a>
-    </p>
-  </section>
-
-  <!-- ===================== -->
-  <!-- SURROGATE CFD -->
-  <!-- ===================== -->
-  <section class="project">
-    <h1 class="content2">COMPUTATIONAL ENGINEERING — RAY-CAST SURROGATE CFD ESTIMATOR</h1>
-    <p class="tag">CFD • Numerical Methods • Geometry Processing • Performance Estimation</p>
-
-    <h2 class="content1">
-      This project implements a surrogate computational fluid dynamics (CFD) estimator using ray-casting techniques
-      to rapidly approximate flow behavior and pressure characteristics in complex geometries.
-    </h2>
-
-    <h2 class="content1">
-      The system is designed to provide hyper-accelerated performance estimation compared to traditional CFD solvers,
-      enabling rapid iteration during early-stage design and optimization. Heres a small codeblock that illustrates the model subdicision with raycsting.
-    </h2>
-      <pre><code class="language-python">
-def slice_grid(mesh, x, N):
+      <!-- 04 -->
+      <section class="project-entry">
+        <p class="project-index">04 / Computational Engineering</p>
+        <h1 class="project-title">Ray-Cast Surrogate CFD Estimator</h1>
+        <div class="project-tags">
+          <span class="tag">CFD</span>
+          <span class="tag">Numerical Methods</span>
+          <span class="tag">Python</span>
+          <span class="tag">Geometry Processing</span>
+        </div>
+        <div class="status-line">
+          <div class="status-dot"></div>
+          <span class="status-text">Active — In-House Design Tool</span>
+        </div>
+        <div class="project-body">
+          <p>
+            Surrogate CFD estimator using ray-casting to approximate flow area and blockage characteristics
+            in complex geometries. Runs fast enough to screen variants during active design iteration —
+            not after. Pre-CFD filter before committing to full-resolution simulation.
+          </p>
+        </div>
+        <div class="code-wrap">
+          <div class="code-label">mesh subdivision via ray-casting</div>
+          <pre><code class="language-python">def slice_grid(mesh, x, N):
     ymin, zmin = mesh.bounds[0][1:]
     ymax, zmax = mesh.bounds[1][1:]
-
     ys = np.linspace(ymin, ymax, N)
     zs = np.linspace(zmin, zmax, N)
-
     x0 = mesh.bounds[0][0] - 0.5
     origins = np.array([[x0, y, z] for y in ys for z in zs])
     dirs = np.tile([1, 0, 0], (len(origins), 1))
-
     hits = mesh.ray.intersects_any(origins, dirs)
-    return hits.reshape(N, N).astype(float)
-</code></pre>
-    <h2 class="content1">
-      The estimator serves as a pre-CFD screening tool to identify promising geometries before committing to full-resolution simulations.
-    </h2>
+    return hits.reshape(N, N).astype(float)</code></pre>
+        </div>
+      </section>
 
-    <p class="project-links">
-      <a href="portfolio-projects/am/portfolio.pdf">📄 Technical Overview (PDF)</a>
-    </p>
+      <!-- 05 -->
+      <section class="project-entry">
+        <p class="project-index">05 / Engineering</p>
+        <h1 class="project-title">3.6L Inline-4 Rotary Valve Engine</h1>
+        <div class="project-tags">
+          <span class="tag">CAD</span>
+          <span class="tag">ICE Simulation</span>
+          <span class="tag">Fusion 360</span>
+          <span class="tag">Blender</span>
+        </div>
+        <div class="status-line">
+          <div class="status-dot"></div>
+          <span class="status-text">Simulated — ~900 hp Crank Output</span>
+        </div>
+        <div class="project-body">
+          <p>
+            3.6L inline-4 replacing camshafts and poppet valves with a rotary valve system — actuation and timing
+            combined into a single rotating assembly via mechanical seals and carbon bushings.
+            Increased airflow, reduced valvetrain complexity. Simulations indicate ~900 hp at the crank
+            (~250 hp/L), exceeding current naturally aspirated specific output benchmarks.
+          </p>
+        </div>
+        <div class="stat-row">
+          <div class="stat">
+            <span class="stat-value">~900 hp</span>
+            <span class="stat-label">Simulated crank output</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value">~250 hp/L</span>
+            <span class="stat-label">Specific output</span>
+          </div>
+        </div>
+        <div class="project-links">
+          <a href="portfolio-projects/36li4/36Li4.pdf">📄 Technical Summary</a>
+        </div>
+      </section>
 
+      <!-- 06 -->
+      <section class="project-entry">
+        <p class="project-index">06 / Computational Engineering</p>
+        <h1 class="project-title">BMEP & Performance Modeling Framework</h1>
+        <div class="project-tags">
+          <span class="tag">Engine Modeling</span>
+          <span class="tag">Thermodynamics</span>
+          <span class="tag">Python</span>
+        </div>
+        <div class="status-line">
+          <div class="status-dot"></div>
+          <span class="status-text">Active — In-House Simulation Tool</span>
+        </div>
+        <div class="project-body">
+          <p>
+            BMEP-based engine simulation for estimating torque, power, and volumetric efficiency across operating ranges.
+            Rapid exploration of displacement, RPM range, and airflow assumptions before committing to detailed mechanical design.
+            Feeds directly into the surrogate CFD pipeline for geometry screening.
+          </p>
+        </div>
+      </section>
 
-  </section>
+      <!-- 07 -->
+      <section class="project-entry">
+        <p class="project-index">07 / Programming</p>
+        <h1 class="project-title">ObsidianDart — CLI Encryption Tool</h1>
+        <div class="project-tags">
+          <span class="tag">C++</span>
+          <span class="tag">Cryptography</span>
+          <span class="tag">Linux</span>
+          <span class="tag">OpenSSL</span>
+        </div>
+        <div class="status-line">
+          <div class="status-dot in-dev"></div>
+          <span class="status-text">Preparing for Public Release</span>
+        </div>
+        <div class="project-body">
+          <p>
+            Lightweight CLI encryption utility in C++ for Linux. AES-256 via OpenSSL.
+            Local file encryption with tab- and comma-separated value formatting for external tool compatibility.
+            Intentionally minimal — no cloud, no dependencies, small codebase.
+          </p>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/00jnr00/ObsidianDart">GitHub →</a>
+        </div>
+      </section>
 
-  <!-- ===================== -->
-  <!-- BMEP SIMULATION -->
-  <!-- ===================== -->
-  <section class="project">
-    <h1 class="content2">ENGINE SIMULATION — BMEP & PERFORMANCE MODELING</h1>
-    <p class="tag">Engine Modeling • Thermodynamics • Performance Simulation</p>
-
-    <h2 class="content1">
-      This project focuses on brake mean effective pressure (BMEP)-based engine simulation to estimate torque, power,
-      and volumetric efficiency across operating ranges.
-    </h2>
-
-    <h2 class="content1">
-      The model is used to compare engine architectures, airflow configurations, and combustion assumptions
-      to guide early-stage engine design decisions.
-    </h2>
-
-    <h2 class="content1">
-      The simulation framework allows rapid exploration of displacement, RPM range, and airflow assumptions
-      to assess feasibility prior to detailed mechanical design.
-    </h2>
-
-    <p class="project-links">
-      <a href="portfolio/bmep/bmep_simulation_overview.pdf">📄 Simulation Overview Document not Currently Available (PDF)</a>
-    </p>
-  </section>
-
-  <!-- ===================== -->
-  <!-- BATTLE BOT (OPTIONAL KEEP) -->
-  <!-- ===================== -->
-  <section class="project">
-    <h1 class="content2">ENGINEERING — COMBAT ROBOT DESIGN & FABRICATION</h1>
-    <p class="tag">Electronics • CAD • Fabrication • Mechatronics</p>
-
-    <h2 class="content1">
-      I have designed and built multiple combat robots, handling mechanical design, electrical systems,
-      wiring diagrams, soldering, and radio control integration.
-    </h2>
-
-    <h2 class="content1">
-      Structural components and mounts were designed in Fusion 360 and fabricated using 3D printing.
-    </h2>
-
-    <div class="image-container">
-      <img src="portfolio-projects/battlebot/shell.jpeg" class="rounded-image">
-      <img src="portfolio-projects/battlebot/internals.jpeg" class="rounded-image">
-      <img src="portfolio-projects/battlebot/wiring-diagram.jpeg" class="rounded-image">
+      <div class="page-footer">
+        Sanchez Performance LLC · Austin, Texas · 2026
+      </div>
     </div>
-  </section>
-
-</section>
-<!-- end of site content -->
-
-
-<!-- ================= END PROJECTS ================= -->
-
   </body>
 </html>
