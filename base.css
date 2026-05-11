@@ -1,6 +1,6 @@
 @import url('https://unpkg.com/normalize.css') layer(normalize);
 
-@layer normalize, base, demo, stick, effect, srollbar, debug;
+@layer normalize, base, demo, stick, effect, scrollbar, debug; /* fixed: srollbar -> scrollbar */
 
 @layer debug {
     [data-debug='true'] li {
@@ -33,7 +33,6 @@
             animation-name: change, chroma-on, chroma-off;
             animation-fill-mode: both;
             animation-timing-function: linear;
-            /* animation-timeline: scroll(root); */
             animation-range: entry 50% exit 50%, entry 40% entry 50%,
             exit 30% exit 40%;
             animation-timeline: --list;
@@ -64,18 +63,10 @@
     :root {
         --start: 0;
         --end: 360;
-        --lightness: 65%;
+        --lightness: 75%; /* forced to dark value */
         --base-chroma: 0.3;
     }
-    [data-theme='dark'] {
-        --lightness: 75%;
-    }
-    [data-theme='light'] {
-        --lightness: 65%;
-    }
-    @media (prefers-color-scheme: dark) {
-        --lightness: 75%;
-    }
+    /* removed light/dark theme overrides and media query — always dark */
     ul {
         --step: calc((var(--end) - var(--start)) / (var(--count) - 1));
     }
@@ -218,16 +209,10 @@
     }
 
     html {
-        color-scheme: light dark;
+        color-scheme: dark; /* forced dark */
     }
 
-    [data-theme='light'] {
-        color-scheme: light only;
-    }
-
-    [data-theme='dark'] {
-        color-scheme: dark only;
-    }
+    /* removed [data-theme] overrides — always dark */
 
     :where(.fluid) {
         --fluid-min: calc(
@@ -259,7 +244,7 @@
     body {
         display: grid;
         place-items: center;
-        background: light-dark(white, black);
+        background: black; /* forced instead of light-dark(white, black) */
         min-height: 100vh;
         font-family: 'Geist', 'SF Pro Text', 'SF Pro Icons', 'AOS Icons',
         'Helvetica Neue', Helvetica, Arial, sans-serif, system-ui;
@@ -302,7 +287,7 @@
     :where(.x-link, .bear-link):is(:hover, :focus-visible) {
         opacity: 1;
     }
-    /* Utilities */
+
     .sr-only {
         position: absolute;
         width: 1px;
@@ -319,58 +304,54 @@
 div.tp-dfwv {
     position: fixed;
 }
+
 .deck1 {
-    float:right;
+    float: right;
     max-height: 75px;
 }
-.deck2  {
-    float:left;
+.deck2 {
+    float: left;
     max-height: 75px;
 }
-.content3  {
-    color:gray
-    font-size:12px;
-
+.content3 {
+    color: gray;
+    font-size: 12px;
 }
-.content1  {
-    color:white
-    font-size:16px;
-     margin-left: 40px;
-
+.content1 {
+    color: white;
+    font-size: 16px;
+    margin-left: 40px;
 }
-.content2  {
-    color:white
+.content2 {
+    color: white;
     font-size: 30px;
     text-align: center;
 }
 .link {
-    color:gray
+    color: gray;
     text-align: center;
     font-size: 58px;
     padding-right: 32px;
-
 }
 
 .img {
     border-radius: 1000px;
-    width: 600px
+    width: 600px;
 }
 
 .image-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px; /* space between images */
+    gap: 20px;
     margin-top: 40px;
-    flex-wrap: wrap; /* Allows images to wrap on small screens */
+    flex-wrap: wrap;
 }
 
 .rounded-image {
-    height: 300px; /* consistent height */
-    width: auto; /* keep aspect ratio */
+    height: 300px;
+    width: auto;
     border-radius: 15px;
     border: 2px solid #ccc;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
-
-

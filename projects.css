@@ -1,3 +1,8 @@
+:root, html, body {
+    color-scheme: dark !important;
+    background: black !important;
+    color: white !important;
+}
 @import url('https://unpkg.com/normalize.css') layer(normalize);
 
 @layer normalize, base, demo, stick, effect, scrollbar, debug;
@@ -35,13 +40,11 @@
     :root {
         --start: 0;
         --end: 360;
-        --lightness: 65%;
+        --lightness: 75%; /* forced to dark value */
         --base-chroma: 0.3;
     }
 
-    [data-theme='dark'] {
-        --lightness: 75%;
-    }
+    /* removed [data-theme='dark'] override — always dark now */
 
     ul {
         --step: calc((var(--end) - var(--start)) / (var(--count) - 1));
@@ -83,11 +86,11 @@
     }
 
     html {
-        color-scheme: light dark;
+        color-scheme: dark; /* forced dark — no more light/dark switching */
     }
 
     body {
-        background: light-dark(white, black);
+        background: black; /* explicit instead of light-dark() */
         min-height: 100vh;
         font-family: 'Geist', system-ui, sans-serif;
     }
@@ -99,8 +102,8 @@
         position: fixed;
         inset: 0;
         background:
-            linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)),
-            linear-gradient(var(--line) 1px, transparent 1px var(--size));
+        linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)),
+        linear-gradient(var(--line) 1px, transparent 1px var(--size));
         background-size: var(--size) var(--size);
         mask: linear-gradient(-20deg, transparent 50%, white);
         pointer-events: none;
@@ -186,6 +189,7 @@
     border: 1px solid #444;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
+
 pre {
     background: #0b0b0b;
     border-radius: 12px;
